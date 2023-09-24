@@ -1,0 +1,14 @@
+# OSX
+.DS_Store
+
+# Project
+tests/.netrc-nonexisent
+
+# Python
+__pycache__/
+*.egg-info/
+*.pyc
+.ruff_cache/
+build/
+dist/
+.coverage

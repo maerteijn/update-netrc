@@ -1,0 +1,78 @@
+[project]
+name = "update-netrc"
+description = "A simple command line utility to update netrc credentials"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+readme = "README.md"
+authors = [{name = "Maerteijn", email = "maerteijn@gmail.com"}]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: System :: Systems Administration"
+]
+dynamic = ["version"]
+
+[project.urls]
+"Repository" = "https://github.com/maerteijn/update-netrc"
+
+[project.scripts]
+"update-netrc" =  "update_netrc.cli:main"
+
+[tool.setuptools_scm]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[project.optional-dependencies]
+dev = [
+    "pip-tools~=7.3",
+    "ruff~=0.0.291",
+    "black~=23.9",
+    "pytest~=7.4",
+    "pytest-cov~=4.0",
+    "mypy~=1.5",
+    "twine~=4.0"
+]
+
+[build-system]
+requires = ["setuptools", "setuptools-scm", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.ruff]
+line-length = 88
+extend-select = ["W", "I001", "Q"]
+ignore = ["E203", "E231", "E266", "E501", "F405"]
+
+[tool.black]
+line-length = 88
+
+[tool.pytest.ini_options]
+testpaths = "tests/"
+
+[tool.coverage.run]
+omit = ["**/tests/**"]
+
+[tool.coverage.report]
+show_missing = true
+
+[tool.mypy]
+exclude = ["tests/*"]
+# see https://careers.wolt.com/en/blog/tech/professional-grade-mypy-configuration
+disallow_untyped_defs = true
+disallow_any_unimported = true
+no_implicit_optional = true
+check_untyped_defs = true
+warn_return_any = true
+warn_unused_ignores = true
+show_error_codes = true
+
+[tool.pylsp-mypy]
+exclude = ["tests/*"]
