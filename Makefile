@@ -30,9 +30,9 @@ format:
 wheel:
 	pip wheel . -w dist
 
-publish-release-testpypi: wheel
+publish-release-pypi-test: wheel
 	twine upload --repository testpypi dist/*
 
-publish_release: build_release
+publish_release-pypi: build_release
 	twine upload dist/*
 
