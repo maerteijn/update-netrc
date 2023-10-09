@@ -1,0 +1,41 @@
+name: Publish to pypi
+on: workflow_dispatch
+
+jobs:
+  build:
+    name: Build distribution
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.x"
+    - name: Install wheel
+      run: pip install wheel
+    - name: Build a binary wheel
+      run: make wheel
+    - name: Store the distribution packages
+      uses: actions/upload-artifact@v3
+      with:
+        name: update-netrc-wheels
+        path: dist/
+
+  publish-to-pypi:
+    name: Publish wheel to pypi
+    needs:
+    - build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/update-netrc
+    permissions:
+      id-token: write  # IMPORTANT: mandatory for trusted publishing
+    steps:
+    - name: Download the wheels
+      uses: actions/download-artifact@v3
+      with:
+        name: update-netrc-wheels
+        path: dist/
+    - name: Publish wheel to pypi
+      uses: pypa/gh-action-pypi-publish@release/v1
