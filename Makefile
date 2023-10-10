@@ -1,4 +1,4 @@
-.PHONY: clean install versions lint test cov format
+.PHONY: clean install versions lint test cov format dist publish-release-pypi-test publish_release-pypi
 
 default: clean install
 
@@ -10,7 +10,7 @@ versions:
 	pip-compile --extra dev --no-emit-index-url --upgrade -o requirements-dev.txt pyproject.toml
 
 install:
-	pip install -r requirements-dev.txt -e .
+	pip install -r requirements-dev.txt -e .[dist]
 
 lint:
 	black --check src tests
@@ -27,10 +27,10 @@ format:
 	black --preview src tests
 	ruff check src tests --preview --fix
 
-wheel:
-	pip wheel . -w dist
+dist:
+	pyproject-build .
 
-publish-release-pypi-test: wheel
+publish-release-pypi-test: dist
 	twine upload --repository testpypi dist/*
 
 publish_release-pypi: build_release

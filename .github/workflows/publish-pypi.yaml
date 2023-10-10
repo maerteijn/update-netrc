@@ -11,18 +11,18 @@ jobs:
       uses: actions/setup-python@v4
       with:
         python-version: "3.x"
-    - name: Install wheel
-      run: pip install wheel
-    - name: Build a binary wheel
-      run: make wheel
+    - name: Install build
+      run: pip install build
+    - name: Build the distribution
+      run: make dist
     - name: Store the distribution packages
       uses: actions/upload-artifact@v3
       with:
-        name: update-netrc-wheels
+        name: dist
         path: dist/
 
   publish-to-pypi:
-    name: Publish wheel to pypi
+    name: Publish distribution to pypi
     needs:
     - build
     runs-on: ubuntu-latest
@@ -32,10 +32,10 @@ jobs:
     permissions:
       id-token: write  # IMPORTANT: mandatory for trusted publishing
     steps:
-    - name: Download the wheels
+    - name: Download the distribution
       uses: actions/download-artifact@v3
       with:
-        name: update-netrc-wheels
+        name: dist
         path: dist/
-    - name: Publish wheel to pypi
+    - name: Publish distribution to pypi test
       uses: pypa/gh-action-pypi-publish@release/v1
