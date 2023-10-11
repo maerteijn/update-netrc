@@ -58,6 +58,19 @@ class UpdateNetrc(netrc.netrc):
             password or old_password,
         )
 
+    def is_valid(self) -> bool:
+        """ "
+        Makes sure all login / password (required fields) have a value
+        """
+        for host in self.hosts:
+            login, account, password = self.hosts[host]
+
+            if login == "":
+                raise ValueError(f"{host}: login is empty, please provide a value")
+            if password == "":
+                raise ValueError(f"{host}: password is empty, please provide a value")
+        return True
+
     def save(self) -> None:
         with open(self.netrc_path, "w") as f:
             f.write(str(self))

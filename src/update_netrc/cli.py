@@ -44,6 +44,11 @@ def main(args: Union[list, None] = None) -> None:
             account=parsed_args.account,
             password=parsed_args.password,
         )
-        netrc_instance.save()
         sys.stdout.write(f"Updating {parsed_args.netrc_path}...\n")
-        sys.stdout.write("Done!\n")
+
+        try:
+            netrc_instance.is_valid()
+            netrc_instance.save()
+            sys.stdout.write("Done!\n")
+        except ValueError as e:
+            sys.stderr.write(f"{e}\n")

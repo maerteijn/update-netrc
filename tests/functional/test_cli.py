@@ -25,23 +25,23 @@ def test_help__update(capsys, option):
 
 
 @pytest.mark.parametrize(
-    "credentials",
+    "params",
     (
-        ("my-updated-login", "", ""),
-        ("", "my-updated-account", ""),
-        ("", "", "my-updated-password"),
-        ("my-updated-login", "my-updated-account", "my-updated-password"),
-        ("", "", ""),
+        ("localhost", "my-updated-login", "", ""),
+        ("localhost", "", "my-updated-account", ""),
+        ("localhost", "", "", "my-updated-password"),
+        ("localhost", "my-updated-login", "my-updated-account", "my-updated-password"),
+        ("localhost", "", "", ""),
     ),
 )
-def test_update_host(capsys, test_netrc_path, credentials):
-    new_login, new_account, new_password = credentials
+def test_update__existing_host(capsys, test_netrc_path, params):
+    host, new_login, new_account, new_password = params
 
     cli_options = [
         "--netrc-path",
         str(test_netrc_path),
         "update",
-        "localhost",
+        host,
         "--login",
         new_login,
         "--account",
@@ -63,3 +63,47 @@ def test_update_host(capsys, test_netrc_path, credentials):
     assert login == new_login if new_login else login
     assert account == new_account if new_account else account
     assert password == new_password if new_password else password
+
+
+@pytest.mark.parametrize(
+    "params",
+    (
+        # new-host is a new entry
+        ("new-host", "my-updated-login", "", "", False),
+        ("new-host", "", "my-updated-account", "", False),
+        ("new-host", "", "", "my-updated-password", False),
+        ("new-host", "", "", "", False),
+        ("new-host", "my-updated-login", "", "my-updated-password", True),
+        (
+            "new-host",
+            "my-updated-login",
+            "my-updated-account",
+            "my-updated-password",
+            True,
+        ),
+    ),
+)
+def test_update__new_host(capsys, test_netrc_path, params):
+    host, new_login, new_account, new_password, is_valid = params
+
+    cli_options = [
+        "--netrc-path",
+        str(test_netrc_path),
+        "update",
+        host,
+        "--login",
+        new_login,
+        "--account",
+        new_account,
+        "--password",
+        new_password,
+    ]
+    main(cli_options)
+
+    if is_valid:
+        output = capsys.readouterr().out
+        assert f"Updating {test_netrc_path}..." in output
+        assert "Done!" in output
+    else:
+        output = capsys.readouterr().err
+        assert "is empty, please provide a value" in output
