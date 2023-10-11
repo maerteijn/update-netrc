@@ -58,6 +58,11 @@ To update the login of the `default` machine
 $ update-netrc update default --login my-login
 ```
 
+You can also add new entries, `--login` and `--password` are then required:
+```sh
+$ update-netrc update my-new-host --login my-login --password my-password
+```
+
 ## Installation
 
 ```sh
