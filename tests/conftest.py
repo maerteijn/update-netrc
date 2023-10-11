@@ -10,7 +10,12 @@ def testdir_location(request):
 
 @pytest.fixture
 def test_netrc_path(testdir_location):
-    return testdir_location / ".netrc"
+    netrc_path = testdir_location / ".netrc"
+    old_content = open(netrc_path, "r").read()
+
+    yield netrc_path
+
+    open(netrc_path, "w").write(old_content)
 
 
 @pytest.fixture
