@@ -1,7 +1,7 @@
 # update-netrc
 [![CI](https://github.com/maerteijn/update-netrc/actions/workflows/ci.yml/badge.svg)](https://github.com/maerteijn/update-netrc/actions/workflows/ci.yml)
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
-![PyPI version](https://badge.fury.io/py/update-netrc.svg)
+![PyPI version](https://badge.fury.io/py/update-netrc.svg?dummy=unused)
 ![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)
 ![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
