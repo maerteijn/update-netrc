@@ -1,6 +1,7 @@
 from netrc import netrc
 
 import pytest
+
 from update_netrc.cli import main
 
 

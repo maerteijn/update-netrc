@@ -1,4 +1,5 @@
 import pytest
+
 from update_netrc import UpdateNetrc
 
 

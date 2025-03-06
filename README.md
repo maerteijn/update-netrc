@@ -1,18 +1,18 @@
 # update-netrc
+A simple command line utility to update netrc credentials.
+
 [![CI](https://github.com/maerteijn/update-netrc/actions/workflows/ci.yml/badge.svg)](https://github.com/maerteijn/update-netrc/actions/workflows/ci.yml)
 ![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)
 ![PyPI version](https://badge.fury.io/py/update-netrc.svg?dummy=unused)
-![Python 3.8](https://img.shields.io/badge/python-3.8-blue.svg)
 ![Python 3.9](https://img.shields.io/badge/python-3.9-blue.svg)
 ![Python 3.10](https://img.shields.io/badge/python-3.10-blue.svg)
 ![Python 3.11](https://img.shields.io/badge/python-3.11-blue.svg)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)
+![Python 3.13](https://img.shields.io/badge/python-3.13-blue.svg)
 [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
 ![No Dependencies](https://img.shields.io/badge/no%20dependencies-orange)
 
-A simple command line utility to update netrc credentials.
 
 ## Usage
 ```bash
@@ -84,14 +84,14 @@ make install
 ```
 
 ### Linting
-`black`, `ruff` and `mypy` are installed and configured
+`ruff` and `mypy` are installed and configured
 ```bash
 make lint
 ```
 
 ### Formatting
 
-`black` and `ruff` are configured
+`ruff` is configured
 ```bash
 make format
 ```

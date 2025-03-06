@@ -13,8 +13,7 @@ install:
 	pip install -r requirements-dev.txt -e .[dist]
 
 lint:
-	black --check src tests
-	ruff check src tests --preview
+	ruff check src tests
 	mypy .
 
 test:
@@ -24,8 +23,8 @@ cov:
 	pytest --cov=update_netrc --cov-report=html --cov-report=term
 
 format:
-	black --preview src tests
-	ruff check src tests --preview --fix
+	ruff check src tests --fix
+	ruff format
 
 dist:
 	pyproject-build .
